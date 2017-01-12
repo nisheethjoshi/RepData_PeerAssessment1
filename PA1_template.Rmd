@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Loading and preprocessing the data
+This section show how dataset is read.
 
 ```{r preprocess}
 activity <- read.csv("activity.csv")
@@ -17,6 +18,7 @@ View(activity)
 ```
 
 ## What is mean total number of steps taken per day?
+This section plots a Histogram of the total number of steps taken each day. Moreover it also calculates mean and median number of steps taken each day.
 
 ```{r activity 0}
 stepsTotalPerDay <- tapply(activity$steps, activity$date, sum)
@@ -26,6 +28,7 @@ median(stepsTotalPerDay, na.rm = TRUE)
 ```
 
 ## What is the average daily activity pattern?
+This section plots a time series of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis). 
 
 ```{r activity 1}
 stepsMeanPerInterval <- tapply(activity$steps, activity$interval, mean, na.rm = T)
@@ -35,6 +38,7 @@ seq(along = stepsMeanPerInterval)[stepsMeanPerInterval == max(stepsMeanPerInterv
 ```
 
 ## Imputing missing values
+This section calcuates the total number of NAs and plots a Histogram for Frequecy against number of steps taken per data. While doing this NAs have been ignored.
 
 ```{r activity 2}
 sum(as.numeric(is.na(activity$steps)))
@@ -57,6 +61,7 @@ plot(stepsMeanPerInterval_NoNA, type = "l", xlab = "Interval", ylab = "# of Step
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+This section fators the data for two saperate type of days i.e. weekdays and weekends and plots the time series graph for both.
 
 ```{r activity 3}
 tmpLT <- as.POSIXlt(activity$date, format = "%Y-%m-%d")
